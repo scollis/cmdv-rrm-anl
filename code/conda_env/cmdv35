@@ -1,0 +1,1 @@
+conda create --name cmdv35 python=3 basemap netcdf4 scipy jupyter nose ipyparallel
