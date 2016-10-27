@@ -13,6 +13,7 @@ to CF-Radial
 
 import os
 from glob import glob
+from datetime import datetime
 
 
 def get_file_tree(start_dir, pattern):
@@ -83,3 +84,43 @@ def create_monthly_filelist_cpol(epoch, year,
 
     radar_file_names = get_file_tree(start_dir, pattern)
     return radar_file_names
+
+
+def directory_structure(date, radar_name, base = None):
+    """
+    cpol|berrimah)/YYYY/MMDD/
+    return the directory structure for
+    cmdv-rrm-anl darwin radar files
+
+    Parameters
+    ----------
+    date : datetime.datetime object
+        time of the start of the radar volume
+
+    radar_name : string
+        cpol or berrimah
+
+    base : string, optional
+        base directory
+
+    Returns
+    -------
+        dir_struct : string
+            directory
+    """
+    if base is None:
+        base = '/lcrc/group/earthscience/radar/darwin/'
+
+    dt_str = datetime.strftime(date, "%Y/%m%d")
+    dir_struct = os.path.join(base, radar_name, dt_str)
+    return dir_struct
+
+
+
+
+date = datetime(2010,10,10,10,10)
+print(directory_structure(date, 'cpol'))
+
+
+
+
